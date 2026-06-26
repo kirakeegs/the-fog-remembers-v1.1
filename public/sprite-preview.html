@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprite 图集预览 - 雾会记得</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: #1a1a1c;
+      color: #e8e2c4;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #f5edbd;
+      font-size: 2rem;
+    }
+    .section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: #252528;
+      border-radius: 8px;
+      border: 1px solid #3a3a3d;
+    }
+    h2 {
+      color: #c4a672;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .item {
+      background: #1a1a1c;
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid #2a2a2d;
+    }
+    .item img {
+      max-width: 100%;
+      height: auto;
+      image-rendering: pixelated;
+      background: #0a0a0c;
+      border: 1px solid #3a3a3d;
+      border-radius: 4px;
+      padding: 0.5rem;
+    }
+    .item h3 {
+      margin-top: 0.8rem;
+      font-size: 1rem;
+      color: #f5edbd;
+    }
+    .item p {
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      color: #8a8a92;
+    }
+    .status {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .status.ok { background: #2a5a3a; color: #90ff90; }
+    .status.missing { background: #5a2a2a; color: #ff9090; }
+    .note {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #2a2520;
+      border-left: 3px solid #c4a672;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Sprite 图集预览</h1>
+
+  <div class="section">
+    <h2>🧍 角色 (Characters)</h2>
+    <div class="grid">
+      <div class="item">
+        <img src="/assets/characters/player-walk.png" alt="Player" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22%3E%3Crect fill=%22%231a1a1c%22 width=%22256%22 height=%22256%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2220%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>玩家行走动画</h3>
+        <p>256×256 / 4×4 grid / 64×64 per frame</p>
+        <span class="status" id="status-player">检测中...</span>
+      </div>
+      <div class="item">
+        <img src="/assets/characters/survivor-idle.png" alt="Survivor" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22192%22 height=%2264%22%3E%3Crect fill=%22%231a1a1c%22 width=%22192%22 height=%2264%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2216%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>幸存者动画</h3>
+        <p>192×64 / 4×1 grid / 48×64 per frame</p>
+        <span class="status missing">待生成</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>👹 怪物 (Monsters)</h2>
+    <div class="grid">
+      <div class="item">
+        <img src="/assets/monsters/wanderer-anim.png" alt="Wanderer" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22224%22 height=%22128%22%3E%3Crect fill=%22%231a1a1c%22 width=%22224%22 height=%22128%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2218%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>游荡者</h3>
+        <p>224×128 / 4×2 grid / 56×64 per frame</p>
+        <span class="status" id="status-wanderer">检测中...</span>
+      </div>
+      <div class="item">
+        <img src="/assets/monsters/stalker-anim.png" alt="Stalker" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22144%22%3E%3Crect fill=%22%231a1a1c%22 width=%22256%22 height=%22144%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2218%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>追猎者</h3>
+        <p>256×144 / 4×2 grid / 64×72 per frame</p>
+        <span class="status missing">待生成</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔋 道具 (Items)</h2>
+    <div class="grid">
+      <div class="item">
+        <img src="/assets/items/battery.png" alt="Battery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect fill=%22%231a1a1c%22 width=%2264%22 height=%2264%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2214%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>电池</h3>
+        <p>64×64 / 单帧</p>
+        <span class="status" id="status-battery">检测中...</span>
+      </div>
+      <div class="item">
+        <img src="/assets/items/potion.png" alt="Potion" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect fill=%22%231a1a1c%22 width=%2264%22 height=%2264%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2214%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>药水</h3>
+        <p>64×64 / 单帧</p>
+        <span class="status" id="status-potion">检测中...</span>
+      </div>
+      <div class="item">
+        <img src="/assets/items/crucifix.png" alt="Crucifix" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect fill=%22%231a1a1c%22 width=%2264%22 height=%2264%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2214%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>十字架</h3>
+        <p>64×64 / 单帧</p>
+        <span class="status" id="status-crucifix">检测中...</span>
+      </div>
+      <div class="item">
+        <img src="/assets/items/clue.png" alt="Clue" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect fill=%22%231a1a1c%22 width=%2264%22 height=%2264%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2214%22%3E未生成%3C/text%3E%3C/svg%3E'">
+        <h3>证物</h3>
+        <p>64×64 / 单帧</p>
+        <span class="status missing">待生成</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>📋 说明:</strong>
+    <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+      <li>绿色状态: 图集已加载，游戏内会自动使用</li>
+      <li>红色状态: 图集未生成，游戏内显示圆圈 fallback</li>
+      <li>刷新页面可更新检测状态</li>
+      <li>运行 <code>npm run dev</code> 启动游戏查看实际效果</li>
+    </ul>
+  </div>
+
+  <script>
+    // 检测图片是否成功加载
+    function checkImage(path, statusId) {
+      const img = new Image();
+      img.onload = () => {
+        const el = document.getElementById(statusId);
+        if (el) {
+          el.textContent = '✅ 已加载';
+          el.className = 'status ok';
+        }
+      };
+      img.onerror = () => {
+        const el = document.getElementById(statusId);
+        if (el) {
+          el.textContent = '❌ 未生成';
+          el.className = 'status missing';
+        }
+      };
+      img.src = path;
+    }
+
+    checkImage('/assets/characters/player-walk.png', 'status-player');
+    checkImage('/assets/monsters/wanderer-anim.png', 'status-wanderer');
+    checkImage('/assets/items/battery.png', 'status-battery');
+    checkImage('/assets/items/potion.png', 'status-potion');
+    checkImage('/assets/items/crucifix.png', 'status-crucifix');
+  </script>
+</body>
+</html>
